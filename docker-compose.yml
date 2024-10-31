@@ -1,0 +1,40 @@
+version: "3"
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_DB: test-workflow
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: imdw1A96
+      PGDATA: /data/postgres
+    volumes:
+      - test-workflow-postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - common-network
+
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - common-network
+
+#  svc-first:
+#    image: svc-first
+#    build:
+#      context: ../svc-first
+#      dockerfile: Dockerfile
+#    ports:
+#      - "8001:8001"
+#    networks:
+#      - common-network
+#    depends_on:
+#      - postgres
+#      - redis
+
+networks:
+  common-network:
+volumes:
+  test-workflow-postgres:
